@@ -113,6 +113,7 @@ export default {
         email: "",
         phone: "",
         phoneAdditional: "",
+        active: true,
       },
     };
   },

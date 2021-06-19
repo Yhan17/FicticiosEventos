@@ -14,25 +14,52 @@
       <md-icon>mode</md-icon>
     </md-button>
     <md-dialog :md-active.sync="showDialog">
-      <md-dialog-title>Adicionar Local de Realização de Eventos</md-dialog-title>
+      <md-dialog-title
+        >Adicionar Local de Realização de Eventos</md-dialog-title
+      >
       <form @submit.prevent="submit">
         <md-dialog-content>
           <div class="md-layout">
             <div class="md-layout-item">
               <md-field class="form-group md-invalid" slot="inputs">
                 <md-icon>badge</md-icon>
-                <label>Localização</label>
+                <label>Nome do local</label>
                 <md-input
-                  v-model="address.location"
+                  v-model="address.name"
                   type="text"
                   required
                   maxlength="60"
                 />
                 <validation-error :errors="apiValidationErrors.name" />
               </md-field>
+              <md-field class="form-group md-invalid" slot="inputs">
+                <md-icon>badge</md-icon>
+                <label>Bairro</label>
+                <md-input
+                  v-model="address.district"
+                  type="text"
+                  required
+                  maxlength="60"
+                />
+                <validation-error :errors="apiValidationErrors.district" />
+              </md-field>
             </div>
-            
-          </div> 
+          </div>
+          <div class="md-layout">
+            <div class="md-layout-item">
+              <md-field class="form-group md-invalid" slot="inputs">
+                <md-icon>badge</md-icon>
+                <label>Endereço completo</label>
+                <md-textarea
+                  v-model="address.fullAddress"
+                  type="text"
+                  required
+                  maxlength="60"
+                />
+                <validation-error :errors="apiValidationErrors.fullAddress" />
+              </md-field>
+            </div>
+          </div>
         </md-dialog-content>
         <md-dialog-actions>
           <md-button class="md-secondary" @click="showDialog = false"
@@ -67,7 +94,10 @@ export default {
     return {
       showDialog: false,
       address: {
-        location: "",
+        name: "",
+        district: "",
+        fullAddress: "",
+        active: true,
       },
     };
   },
@@ -109,11 +139,7 @@ export default {
           );
           this.address = {};
         } else {
-          await this.$store.dispatch(
-            "address/update",
-            this.address,
-            this.id
-          );
+          await this.$store.dispatch("address/update", this.address, this.id);
           await this.$store.dispatch(
             "alerts/success",
             "Customer updated with sucess."

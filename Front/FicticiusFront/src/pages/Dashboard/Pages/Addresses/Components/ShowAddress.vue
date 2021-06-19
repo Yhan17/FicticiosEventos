@@ -11,8 +11,20 @@
       <md-dialog-title class="title">Endereço</md-dialog-title>
       <md-dialog-content>
         <h4>
-          Localização:
-          <span>{{ address.location }}</span>
+          Nome do Local:
+          <span>{{ address.name }}</span>
+        </h4>
+        <h4>
+          Distrito:
+          <span>{{ address.district }}</span>
+        </h4>
+        <h4>
+          Endereço Completo:
+          <span>{{ address.fullAddress }}</span>
+        </h4>
+        <h4>
+          Ativo:
+          <span>{{ address.active ? "Sim" : "Não" }}</span>
         </h4>
       </md-dialog-content>
       <md-dialog-actions>

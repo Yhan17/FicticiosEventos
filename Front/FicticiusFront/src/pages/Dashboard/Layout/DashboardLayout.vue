@@ -53,13 +53,13 @@
           <sidebar-item
             :link="{
               name: 'Carregar Clientes',
-              path: '/examples/user-profile',
+              path: '/components/customers/external',
             }"
           />
           <sidebar-item
             :link="{
               name: 'Carregar Imagens de eventos',
-              path: '/examples/user-profile',
+              path: '/components/schedules/images',
             }"
           />
         </sidebar-item>

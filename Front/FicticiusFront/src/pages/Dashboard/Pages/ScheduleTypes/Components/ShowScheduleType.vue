@@ -18,6 +18,10 @@
           Descrição:
           <span>{{ scheduletype.description }}</span>
         </h4>
+        <h4>
+          Ativo:
+          <span>{{ scheduletype.active ? "Sim" : "Não" }}</span>
+        </h4>
       </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-secondary" @click="showDialog = false"
@@ -29,6 +33,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {

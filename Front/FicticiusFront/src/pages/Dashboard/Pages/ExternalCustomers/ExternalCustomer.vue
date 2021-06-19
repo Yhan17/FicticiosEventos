@@ -9,23 +9,31 @@
           <div class="md-layout">
             <div class="md-layout-item"><h4 class="title">Customers</h4></div>
             <div class="md-layout-item md-layout md-alignment-center-right">
-              <form-customer
-                class="md-simple md-indigo md-lg"
-                style="float: right"
-                @updateList="getCustomers"
-              />
+              <div style="display: flex; width: 700px">
+                <md-field @change="previewFiles">
+                  <label>Envie aqui os Novos Clientes (csv,xlsx,xls)</label>
+                  <md-file v-model="metaDataFile" @change="previewFiles" />
+                </md-field>
+                <md-button
+                  class="md-primary"
+                  :disabled="customers.length == 0"
+                  style="float: right"
+                  type="submit"
+                  @click="submit"
+                  >Enviar Novos Clientes</md-button
+                >
+              </div>
             </div>
           </div>
         </md-card-header>
         <md-card-content>
-          <div v-if="customers.length != 0">
+          <div v-if="customers.length">
             <md-table v-model="customers" table-header-color="green">
               <md-table-row
                 slot="md-table-row"
                 slot-scope="{ item }"
                 key="item.id"
               >
-                <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
                 <md-table-cell md-label="Nome">{{ item.name }}</md-table-cell>
                 <md-table-cell md-label="Telefone">{{
                   item.phone
@@ -37,23 +45,6 @@
                 <md-table-cell md-label="Ativo">{{
                   item.active ? "Sim" : "Não"
                 }}</md-table-cell>
-                <md-table-cell md-label="Ação">
-                  <div class="flex">
-                    <show-customer class="action-item" :customer="item" />
-                    <form-customer
-                      class="md-simple md-indigo md-lg action-item"
-                      :id="item.id"
-                      :type="'update'"
-                      @updateList="getCustomers"
-                    />
-                    <md-button
-                      @click="inactive(item)"
-                      class="md-icon-button md-raised md-primary"
-                    >
-                      <md-icon>lock</md-icon>
-                    </md-button>
-                  </div>
-                </md-table-cell>
               </md-table-row>
             </md-table>
           </div>
@@ -68,8 +59,7 @@
 
 <script>
 import formMixin from "@/mixins/form-mixin";
-import FormCustomer from "./Components/FormCustomer.vue";
-import ShowCustomer from "./Components/ShowCustomer.vue";
+import XLSX from "xlsx";
 export default {
   mixins: [formMixin],
   data() {
@@ -83,43 +73,42 @@ export default {
       modal: "",
     };
   },
-  components: {
-    FormCustomer,
-    ShowCustomer,
-  },
-  created() {
-    this.getCustomers();
-  },
+  components: {},
+  created() {},
   methods: {
-    async getCustomers() {
-      let loader = this.$loading.show({
-        color: "#007BFF",
-        height: 128,
-        width: 128,
-      });
-      try {
-        await this.$store.dispatch("customers/index");
-        this.customers = await this.$store.getters["customers/index"];
-      } catch (e) {
-        console.log(e.response);
-      } finally {
-        loader.hide();
-      }
+    previewFiles(e) {
+      let files = e.target.files,
+        f = files[0];
+      let reader = new FileReader();
+      const self = this;
+      reader.onload = function (e) {
+        let data = new Uint8Array(e.target.result);
+        let workbook = XLSX.read(data, { type: "array" });
+        let sheetName = workbook.SheetNames[0];
+        /* DO SOMETHING WITH workbook HERE */
+        console.log(workbook);
+        let worksheet = workbook.Sheets[sheetName];
+        const excell = XLSX.utils.sheet_to_json(worksheet);
+        self.customers = excell.map((o) => ({
+          ...o,
+          active: JSON.parse(o.active),
+        }));
+      };
+      reader.readAsArrayBuffer(f);
     },
-    async inactive(item) {
-      let loader = this.$loading.show({
-        color: "#007BFF",
-        height: 128,
-        width: 128,
-      });
+    async submit() {
       try {
-        item.active = !item.active;
-        await this.$store.dispatch("customers/update", { ...item });
+        await this.$store.dispatch("publicService/store", this.customers);
+        await this.$store.dispatch(
+          "alerts/success",
+          "Customers added with sucess."
+        );
+        this.customer = [];
+        this.$router.push({
+          name: "Customers",
+        });
       } catch (e) {
-        console.log(e.response);
-      } finally {
-        loader.hide();
-        this.getAddress();
+        console.log(e);
       }
     },
     getClass: ({ id }) => ({

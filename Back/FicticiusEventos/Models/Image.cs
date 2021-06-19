@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace TodoApp.Models
 {
-    public class Image
+    public class Image: BaseEntity
     {
         public int Id { get; set; }
         public String Link { get; set; }
-        public int? CustomerId { get; set; }
-        public virtual Customer Customer {get;set;}
+        public int? ScheduleId { get; set; }
+        public virtual Schedule Schedule {get;set;}
     }
 }

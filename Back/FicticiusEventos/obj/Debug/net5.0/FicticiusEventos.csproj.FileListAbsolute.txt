@@ -172,3 +172,4 @@ E:\PROJETOSPROGRAMACAO\ProjectsTopicos3\FicticiusEventosProject\Back\FicticiusEv
 E:\PROJETOSPROGRAMACAO\ProjectsTopicos3\FicticiusEventosProject\Back\FicticiusEventos\obj\Debug\net5.0\ref\FicticiusEventos.dll
 E:\PROJETOSPROGRAMACAO\ProjectsTopicos3\FicticiusEventosProject\Back\FicticiusEventos\obj\Debug\net5.0\FicticiusEventos.pdb
 E:\PROJETOSPROGRAMACAO\ProjectsTopicos3\FicticiusEventosProject\Back\FicticiusEventos\obj\Debug\net5.0\FicticiusEventos.genruntimeconfig.cache
+E:\PROJETOSPROGRAMACAO\ProjectsTopicos3\FicticiusEventosProject\Back\FicticiusEventos\obj\Debug\net5.0\FicticiusEventos.csprojAssemblyReference.cache

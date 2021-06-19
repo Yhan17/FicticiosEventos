@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TodoApp.Models
 {
-  public class ScheduleType
+  public class ScheduleType : BaseEntity
   {
     public int Id { get; set; }
     public String Title { get; set; }

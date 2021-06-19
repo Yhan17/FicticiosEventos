@@ -8,6 +8,8 @@ import users from "./modules/users-module";
 import customers from "./modules/customers-module";
 import address from "./modules/address-module";
 import scheduletype from "./modules/scheduletype-module";
+import schedule from "./modules/schedule-module";
+import publicService from "./modules/public-module";
 
 Vue.use(Vuex);
 
@@ -19,6 +21,8 @@ export default new Vuex.Store({
     customers,
     address,
     scheduletype,
+    schedule,
+    publicService,
     users
   }
 });

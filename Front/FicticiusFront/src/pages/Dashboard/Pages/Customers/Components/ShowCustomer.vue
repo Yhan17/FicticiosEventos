@@ -8,7 +8,9 @@
     </md-button>
 
     <md-dialog :md-active.sync="showDialog">
-      <md-dialog-title class="title">Cliente {{customer.id}} | {{customer.name}}</md-dialog-title>
+      <md-dialog-title class="title"
+        >Cliente {{ customer.id }} | {{ customer.name }}</md-dialog-title
+      >
       <md-dialog-content>
         <h4>
           Nome:
@@ -24,9 +26,12 @@
         </h4>
         <h4>
           Telefone Adicional:
-          <span>{{ customer.phoneAdditional || 'Não Possui' }}</span>
+          <span>{{ customer.phoneAdditional || "Não Possui" }}</span>
         </h4>
-        
+        <h4>
+          Ativo:
+          <span>{{ customer.active ? "Sim" : "Não" }}</span>
+        </h4>
       </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-secondary" @click="showDialog = false"
@@ -63,7 +68,8 @@ h4 > span {
   font-weight: normal;
   font-style: italic;
 }
-h4, span {
+h4,
+span {
   word-wrap: break-word;
   text-align: justify;
 }

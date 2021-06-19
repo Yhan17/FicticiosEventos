@@ -20,7 +20,7 @@
           </div>
         </md-card-header>
         <md-card-content>
-          <div v-if="scheduletype != null">
+          <div v-if="scheduletype.length != 0">
             <md-table v-model="scheduletype" table-header-color="green">
               <md-table-row
                 slot="md-table-row"
@@ -33,6 +33,9 @@
                 }}</md-table-cell>
                 <md-table-cell md-label="Descrição">{{
                   item.description
+                }}</md-table-cell>
+                <md-table-cell md-label="Ativo">{{
+                  item.active ? "Sim" : "Não"
                 }}</md-table-cell>
                 <md-table-cell md-label="Ação">
                   <div class="flex">
@@ -47,6 +50,12 @@
                       :type="'update'"
                       @updateList="getScheduleType"
                     />
+                    <md-button
+                      @click="inactive(item)"
+                      class="md-icon-button md-raised md-primary"
+                    >
+                      <md-icon>lock</md-icon>
+                    </md-button>
                   </div>
                 </md-table-cell>
               </md-table-row>
@@ -99,6 +108,22 @@ export default {
         console.log(e.response);
       } finally {
         loader.hide();
+      }
+    },
+    async inactive(item) {
+      let loader = this.$loading.show({
+        color: "#007BFF",
+        height: 128,
+        width: 128,
+      });
+      try {
+        item.active = !item.active;
+        await this.$store.dispatch("scheduletype/update", { ...item });
+      } catch (e) {
+        console.log(e.response);
+      } finally {
+        loader.hide();
+        this.getAddress();
       }
     },
     getClass: ({ id }) => ({

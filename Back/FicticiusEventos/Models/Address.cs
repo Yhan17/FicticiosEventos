@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TodoApp.Models
 {
-  public class Address
+  public class Address: BaseEntity
   {
     public int Id { get; set; }
     public string Name { get; set; }

@@ -11,7 +11,9 @@
               <h4 class="title">Agenda de Eventos</h4>
             </div>
             <div class="md-layout-item md-layout md-alignment-center-right">
-              <md-button @click="redirectToCreate()">Criar Evento</md-button>
+              <md-button class="md-primary" @click="redirectToCreate()"
+                >Criar Evento</md-button
+              >
             </div>
           </div>
         </md-card-header>
@@ -71,12 +73,14 @@ export default {
               $(response).each(function (index, value) {
                 events.push({
                   id: value.id,
-                  title: value.description,
-                  start: value.dayTime,
-                  end: value.dayTime,
+                  title: value.title,
+                  start: value.date,
+                  end: value.date,
                   extendedProps: {
                     description: value.description,
                     customer: value.customer,
+                    address: value.customer,
+                    scheduleType: value.customer,
                   },
                 });
               });
@@ -85,7 +89,10 @@ export default {
           });
         },
         eventClick: function (element) {
-          self.$refs.showCommitment.openDialog(element.event.id);
+          self.$router.push({
+            name: "Visualizar Evento",
+            params: { id: element.event.id },
+          });
         },
         loading: function (isLoading) {
           self.loading(isLoading);

@@ -10,7 +10,7 @@ if (token) {
 }
 
 function get() {
-  return axios.get(`${url}/Customers`)
+  return axios.get(`${url}/Schedules`)
     .then(response => {
       return {
         list: response.data,
@@ -20,7 +20,7 @@ function get() {
 }
 
 function show(id) {
-  return axios.get(`${url}/Customers/${id}`)
+  return axios.get(`${url}/Schedules/${id}`)
     .then(response => {
       return {
         list: response.data,
@@ -29,16 +29,16 @@ function show(id) {
     });
 }
 
-function update(client, id) {
+function update(address, id) {
 
-  return axios.put(`${url}/Customers/${id}`, client)
+  return axios.put(`${url}/Schedules/${id}`, address)
     .then(response => {
       return response.data;
     });
 }
-function store(client) {
+function store(address) {
 
-  return axios.post(`${url}/Customers`, client)
+  return axios.post(`${url}/Schedules`, address)
     .then(response => {
       return response.data;
     });

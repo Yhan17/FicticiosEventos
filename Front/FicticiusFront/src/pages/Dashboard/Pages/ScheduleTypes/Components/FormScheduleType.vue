@@ -81,6 +81,7 @@ export default {
       scheduletype: {
         title: "",
         description: "",
+        active: true,
       },
     };
   },

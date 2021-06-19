@@ -20,6 +20,10 @@ import Addresses from "@/pages/Dashboard/Pages/Addresses/Addresses.vue";
 import ScheduleType from "@/pages/Dashboard/Pages/ScheduleTypes/ScheduleType.vue";
 import Schedule from "@/pages/Dashboard/Pages/Schedules/Schedule.vue";
 import FormSchedule from "@/pages/Dashboard/Pages/Schedules/Components/FormSchedule.vue";
+import EditSchedule from "@/pages/Dashboard/Pages/Schedules/Components/EditSchedule.vue";
+import ShowSchedule from "@/pages/Dashboard/Pages/Schedules/Components/ShowSchedule.vue";
+import ExternalCustomer from "@/pages/Dashboard/Pages/ExternalCustomers/ExternalCustomer.vue";
+import Mining from "@/pages/Dashboard/Pages/Mining/Mining.vue";
 
 // Components pages
 import Notifications from "@/pages/Dashboard/Components/Notifications.vue";
@@ -76,6 +80,30 @@ let componentsMenu = {
       path: "schedules/create",
       name: "Criar Evento",
       components: { default: FormSchedule },
+      meta: { middleware: auth }
+    },
+    {
+      path: "schedules/edit/:id",
+      name: "Editar Evento",
+      components: { default: EditSchedule },
+      meta: { middleware: auth }
+    },
+    {
+      path: "schedules/show/:id",
+      name: "Visualizar Evento",
+      components: { default: ShowSchedule },
+      meta: { middleware: auth }
+    },
+    {
+      path: "customers/external",
+      name: "Clientes Externos",
+      components: { default: ExternalCustomer },
+      meta: { middleware: auth }
+    },
+    {
+      path: "schedules/images",
+      name: "Imagem dos Eventos",
+      components: { default: Mining },
       meta: { middleware: auth }
     },
     {

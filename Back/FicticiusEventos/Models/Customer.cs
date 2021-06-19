@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TodoApp.Models
 {
-  public class Customer
+  public class Customer: BaseEntity
   {
     public int Id { get; set; }
     [StringLength(55)]
@@ -17,7 +17,6 @@ namespace TodoApp.Models
     public String Phone { get; set; }
     public String PhoneAdditional { get; set; }
     public bool Active { get; set; }
-    public virtual ICollection<Image> Images { get; set; }
     public virtual ICollection<Schedule> Schedules { get; set; }
 
 

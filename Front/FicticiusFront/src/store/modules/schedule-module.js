@@ -1,13 +1,13 @@
-import service from '@/store/services/address-service';
+import service from '@/store/services/schedule-service';
 
 const state = {
-  address: null,
+  schedule: null,
   list: {},
 };
 
 const mutations = {
-  SET_RESOURCE: (state, address) => {
-    state.address = address;
+  SET_RESOURCE: (state, schedule) => {
+    state.schedule = schedule;
   },
   SET_LIST: (state, list) => {
     state.list = list;
@@ -17,39 +17,38 @@ const mutations = {
 const actions = {
   index({ commit, dispatch }, params) {
     return service.get(params)
-      .then((address) => {
-        commit('SET_RESOURCE', address.list);
+      .then((schedule) => {
+        commit('SET_RESOURCE', schedule.list);
       });
   },
   show({ commit, dispatch }, params) {
     return service.show(params)
-      .then((address) => {
-        commit('SET_RESOURCE', address.list);
+      .then((schedule) => {
+        commit('SET_RESOURCE', schedule.list);
       });
   },
 
   update({ commit, dispatch }, params) {
-    console.log(params)
     return service.update(params, params.id)
-      .then((address) => {
-        console.log(address);
+      .then((schedule) => {
+        console.log(schedule);
       });
   },
   store({ commit, dispatch }, params) {
     return service.store(params)
-      .then((address) => {
-        console.log(address)
+      .then((schedule) => {
+        console.log(schedule)
       });
   },
 };
 
 const getters = {
   list: state => state.list,
-  index: state => state.address,
-  show: state => state.address,
+  index: state => state.schedule,
+  show: state => state.schedule,
 };
 
-const address = {
+const schedule = {
   namespaced: true,
   state,
   getters,
@@ -57,4 +56,4 @@ const address = {
   mutations
 };
 
-export default address;
+export default schedule;

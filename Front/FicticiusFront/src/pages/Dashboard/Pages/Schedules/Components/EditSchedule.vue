@@ -8,7 +8,7 @@
           </div>
           <div class="md-layout">
             <div class="md-layout-item">
-              <h4 class="title">Criação de Eventos</h4>
+              <h4 class="title">Edição de Eventos</h4>
             </div>
           </div>
         </md-card-header>
@@ -170,6 +170,9 @@ export default {
   created() {
     this.fetchData();
   },
+  mounted() {
+    this.getSchedule();
+  },
   methods: {
     async openDialog() {
       // If in the parent component the type value is different the "Store", it will enter in update method
@@ -207,6 +210,11 @@ export default {
         loader.hide();
       }
     },
+    async getSchedule() {
+      await this.$store.dispatch("schedule/show", this.$route.params.id);
+      let object = await this.$store.getters["schedule/show"];
+      Object.assign(this.schedule, object);
+    },
     // Send form, verifying if the type is store or other (Update)
     async submit() {
       console.log(this.schedule);
@@ -216,29 +224,13 @@ export default {
         width: 128,
       });
       try {
-        if (this.type === "store") {
-          this.schedule.price = +this.schedule.price;
-          const test = await this.$store.dispatch(
-            "schedule/store",
-            this.schedule
-          );
-          console.log(test);
-          await this.$store.dispatch(
-            "alerts/success",
-            "Schedule added with sucess."
-          );
-          this.schedule = {};
-        } else {
-          this.schedule.price = +this.schedule.price;
+        this.schedule.price = +this.schedule.price;
 
-          await this.$store.dispatch("schedule/update", this.schedule, this.id);
-          await this.$store.dispatch(
-            "alerts/success",
-            "Schedule updated with sucess."
-          );
-        }
-        this.showDialog = false;
-        this.$emit("updateList");
+        await this.$store.dispatch("schedule/update", this.schedule, this.id);
+        await this.$store.dispatch(
+          "alerts/success",
+          "Schedule updated with sucess."
+        );
         this.$router.push({
           name: "Agendamentos",
         });
