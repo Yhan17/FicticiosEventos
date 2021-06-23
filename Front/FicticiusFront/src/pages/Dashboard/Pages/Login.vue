@@ -2,15 +2,8 @@
   <div class="md-layout text-center login-fix-page">
     <div class="md-layout-item md-size-100">
       <div class="text-center">
-        <h3>Log in to Vue Material Dashboard Laravel Live Preview</h3>
-        <p>
-          Log in to see how you can go from frontend to fullstack in an instant
-          with an API-based Laravel backend.
-        </p>
-      </div>
-      <div class="text-center" style="margin-bottom: 32px">
-        <h5><strong>You can log in with:</strong></h5>
-        <div>Username <b>admin@jsonapi.com</b> Password <b>secret</b></div>
+        <h3>Log in Ficticius Eventos</h3>
+        <p>Loga ai no sistema po.</p>
       </div>
     </div>
 
@@ -24,29 +17,8 @@
       "
     >
       <form @submit.prevent="login">
-        <login-card header-color="green">
+        <login-card header-color="blue">
           <h4 slot="title" class="title">Log in</h4>
-          <md-button
-            slot="buttons"
-            ref="#facebook"
-            class="md-just-icon md-simple md-white"
-          >
-            <i class="fab fa-facebook-square"></i>
-          </md-button>
-          <md-button
-            slot="buttons"
-            href="#twitter"
-            class="md-just-icon md-simple md-white"
-          >
-            <i class="fab fa-twitter"></i>
-          </md-button>
-          <md-button
-            slot="buttons"
-            href="#google"
-            class="md-just-icon md-simple md-white"
-          >
-            <i class="fab fa-google-plus-g"></i>
-          </md-button>
           <p slot="description" class="description">Or Be Classical</p>
           <md-field
             class="form-group md-invalid"
@@ -66,9 +38,9 @@
           <md-button
             slot="footer"
             type="submit"
-            class="md-simple md-success md-lg"
+            class="md-simple md-success md-lg button-color"
           >
-            Lets Go
+            Entrar
           </md-button>
         </login-card>
       </form>
@@ -121,6 +93,9 @@ export default {
 .login-fix-page {
   padding-bottom: 7em;
   padding-top: 4em;
+}
+.button-color {
+  color: blue !important;
 }
 </style>
 
